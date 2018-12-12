@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Shopping Cart</title>
+	<style>
+	table, th {
+		border: 1px solid black;
+	}
+
+			body{
+				font-family: Georgia, Times, Times New Roman, serif;
+				font-family: 'Nosifer', cursive;
+				background-color:#b3ffec;
+				font-size:90%;
+				font-weight:bold;
+
+
+			}
+			#container{
+				width: 650px;
+				background-color:linen;
+				border: 5px blue solid;
+				border-radius:5px;
+				background-image: linear-gradient(#ca5ee5, linen);
+			}
+
+			h1 {
+				font-family: Georgia, Times, Times New Roman, serif;
+
+				width:650px;
+				text-shadow: 2px 2px 5px yellow;
+				color: #3a19c1;
+
+				}
+
+			p {
+				font-family: Georgia, Times, Times New Roman, serif;
+			}
+
+			li {
+				font-family: Georgia, Times, Times New Roman, serif;
+				color:#2c9e1a;
+				text-shadow: 2px 2px 5px yellow;
+			}
+			li:hover{
+				color:#236b35;
+				text-shadow: 2px 2px 5px yellow;
+			}
+
+
+			table{
+				border-collapse:collapse;
+				background-color:#e091d8;
+				border-radius:5px;
+			}
+
+			td, th{
+				padding:5px 30px 5px 10px;
+				font-family: Georgia, Times, Times New Roman, serif;
+				font-size:90%;
+				border-spacing:0px;
+				border-bottom: 1px black solid;
+				border-right: 1px black solid;
+				margin:0px;
+			}
+			tr:nth-child(even), th{
+				background-color: #5eafe5;
+			}
+			th{
+				background-color:#bc2fbf;
+				color:black;
+
+			}
+			th:last-child,
+			td:last-child,
+			th:nth-last-child(3),
+			td:nth-last-child(3) {
+				text-align: right;
+			}
+
+			tr:hover td, tr:hover th{
+				background-color:#1fd3cd;
+
+			}
+	img{
+		width:50px;
+		height:auto
+	}
+</style>
+  </head>
+  <body>
+	<header>
+		<h1>Shopping Cart</h1>
+	</header>
+	<div class="container" >
+		<div class="div1">
+			<table id="listTable">
+				<tr>
+					<th colspan="3">Product</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>Subtotal</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+
+				</tr>
+			</table>
+
+		</div>
+		<p id="demo"></p>
+		<a href="item-list.html">Continue shopping</a>
+		<button type="button" id="refresh" value="Reload Page" onClick="reload()">Recalculate</button>
+		<button type="button" id="check out" onclick="location.href = 'checkout.html';">Check Out</button>
+	</div>
+	<script>
+		getShoppingList();
+		function getShoppingList(){
+
+			let data;
+		 if(localStorage.getItem('pl')){
+			data=JSON.parse(localStorage.getItem('pl'));
+		 }
+		 else{
+			data=[];
+		 }
+
+			if(data.length==0){
+				alert("Shopping list is empty!")
+			}
+			else{
+				var table = document.getElementById("listTable");
+
+				let total = 0;
+				let i;
+				for(i=0; i<data.length; i++){
+					var row = table.insertRow(i+1);
+					var cell1=row.insertCell(0);
+					var cell2=row.insertCell(1);
+					var cell3=row.insertCell(2);
+					var cell4=row.insertCell(3);
+					var cell5=row.insertCell(4);
+					var cell6=row.insertCell(5);
+
+					cell1.addEventListener("click", function(){
+					document.getElementById("demo").innerHTML = "Hello World" +count ;
+					});
+					//cell2.innerHTML="image";
+					var img = document.createElement('img');
+					img.src = data[i].image;
+					cell2.appendChild(img);
+
+					cell3.innerHTML=data[i].name +" "+ data[i].describe;
+					cell4.innerHTML="$"+data[i].price;
+					cell5.innerHTML=data[i].quantity;
+					cell6.innerHTML="$"+data[i].amount;
+					total += data[i].amount;
+				}
+				var row = table.insertRow(i+2);
+					var cell1=row.insertCell(0);
+					var cell2=row.insertCell(1);
+					var cell3=row.insertCell(2);
+					var cell4=row.insertCell(3);
+					var cell5=row.insertCell(4);
+					var cell6=row.insertCell(5);
+					cell5.innerHTML="<b>TOTAL</b>";
+					cell6.innerHTML="<b>$"+total+"</b>";
+			}
+		}
+
+	</script>
+	<script>
+		function reload(){
+			location.reload();
+		}
+	</script>
+
+  </body>
+</html>

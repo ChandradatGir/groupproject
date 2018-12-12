@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Selected Item Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/keywords-list.js"></script>
+    <script src="js/review-list.js"></script>
+    <script src="js/review-methods.js"></script>
+
+
+    <style media="screen">
+
+    body{
+      background-color: linen ;
+      max-width: 1800px;
+      width: auto;
+    }
+
+      .clearfix div{
+        float:left;
+        clear:none;
+
+
+      }
+
+      .info-holder {
+
+        width:30%;
+      }
+
+      .img-holder div{
+        max-width: 400px;
+        margin: 15px;
+        width: auto;
+
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Selected Item</h1>
+    <div class="container">
+      <div class="item">
+
+      </div>
+      <!-------->
+        <div class="main clearfix">
+      		<div class="img-holder">
+      			<div >
+      				<img id="info-pic" src="images/Visual-Merch-3.jpg" alt="Electronics" width="260" height=auto>
+      			</div>
+
+      		</div>
+      		<div id="myDiv1" class="info-holder" >
+      			<p><strong>Name: </strong><span id="info-name">Shopping Items</span></p>
+      			<p><strong>Type: </strong><span id="info-type">Visual Merchandising</span></p>
+      			<p><strong>Description: </strong><span id="info-desc">Visual Display of Merchandise</span></p>
+      			<p><strong>Price $: </strong><span id="info-price">---</span></p>
+
+            <form class="form-row" id="purch" action="purchase.html" method="get" >
+              Enter quantity: <input type="text" id="qty" name="qty" value=""> <br>
+              <input type="submit" name="purchase" value="Go to shopping cart">
+            </form>
+
+            <button type="button" name="button" onclick="addToCart()">Add to Cart</button>
+            <p id="pitem"></p>
+            <p id="p-rate"></p>
+            <p id="p-review"></p>
+			     <a href="item-list.html">Continue shopping</a>
+      		</div>
+      	</div>
+
+
+        </div>
+
+
+    </div>
+    <!----Start of review display screem--->
+    <main>
+     <div class="form-row">
+       <form class="surveyForm">
+         <fieldset>
+           <legend>E Commerce Survey Form</legend>
+           <div class="form-row">
+             <p>
+               Dear Sir/Madam,<br> <br>
+
+               It is a great pleasure having you taking part in our survey.
+               Your responses are very important us in that they are integral the service we provide. We will be quick.<br><br>
+               Thank You!<br><br>
+
+               Sincerly,<br>
+               John Doe <br>
+               Manager <br>
+               Epic Survey Inc
+             </p>
+           </div>
+           <div class="form-row">
+             <p>How will you describe your experience about our product(s) and/or service(s)?<br>
+
+            <textarea form="user-review" id="text-review" rows="5" cols="33" placeholder="Please enter review here..."></textarea>
+             <button type="button" id="btn2">Add Review</button>
+
+         </fieldset>
+       </form>
+
+     </div>
+   </main>
+
+
+    <!------>
+<script src="js/item-list.js"></script>
+<script src="js/item-sold.js"></script>
+<script src="js/review-methods.js"></script>
+
+
+    <script type="text/javascript">
+		let l;
+        myFunction();
+      function myFunction(){
+        //set rate and review
+
+
+        //this capture the parameter passes automatically by the browser
+        var parameters = location.search.substring(1).split("&");
+        var temp=parameters[0].split("=");
+         l= unescape(temp[1]);
+
+      //This reads the data from the js data file and render it to screen
+        document.getElementById('info-pic').src = itemData[l].image;
+		    document.getElementById('info-name').textContent = itemData[l].name;
+        document.getElementById('info-type').textContent = itemData[l].type;
+        document.getElementById('info-desc').textContent = itemData[l].describe;
+        document.getElementById('info-price').textContent = itemData[l].price;
+      }
+    </script>
+	<script>
+
+		function addToCart(){
+
+        var parameters = location.search.substring(1).split("&");
+        var temp=parameters[0].split("=");
+         let id= unescape(temp[1]);
+
+		 let purList;
+		 if(localStorage.getItem('pl')){
+			purList=JSON.parse(localStorage.getItem('pl'));
+		 }
+		 else{
+			purList=[];
+		 }
+
+     let quantity = document.getElementById("purch").elements["qty"].value;
+ 		if(quantity<0){
+ 			alert("Quantity cannot be less than zero!")
+ 			myFunction();
+
+ 		}else{
+ 			let img = itemData[id].image;
+ 			let name = itemData[id].name;
+ 			let type = itemData[id].type;
+ 			let price = itemData[id].price
+ 			let desc = itemData[id].describe;
+ 			let amount = price * quantity;
+
+ 			var index;
+ 			var isFound=false;
+ 			for(var i = 0; i<purList.length; i++){
+ 				if(name == purList[i].name){
+ 					index=i;
+ 					isFound=true;
+ 					break;
+ 				}
+
+ 			}
+
+ 			if(isFound && quantity==0){
+
+           purList.splice(index, 1);
+         }
+       else if(isFound && quantity >0) {
+           	purList[index].quantity=quantity;
+             purList[index].amount=quantity * price;
+
+ 			}
+       else if(!isFound && quantity >0){
+ 				let purchase = new item(name, type, desc, price, quantity, img);
+ 				purList.push(purchase);
+ 			}
+
+
+			 localStorage.setItem('pl', JSON.stringify(purList));
+			 let data = JSON.parse(localStorage.getItem('pl'));
+
+			 message = name + " <br>"+desc +" <br>Price: $"+ price + " Quantity: " + quantity + " Cost: $"+ amount +"<br>";
+				document.getElementById("pitem").innerHTML=message +"<br>";
+		    }
+
+    }
+
+
+	</script>
+	<script>
+	  function item(name, type, desc, price, quantity, image){
+			this.name = name;
+			this.type = type;
+			this.describe=desc;
+			this.price = price,
+			this.quantity = quantity;
+			this.image = image;
+			this.amount = this.price * this.quantity;
+
+	  }
+
+	</script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Item List</title>
+    <style media="screen">
+
+      body{
+			font-family: Arial, Helvetica, sans-serif;
+			 background-color: #b3ffec;
+			   color:#787878;
+			   width: 100%;
+		  }
+		  .container{
+			 max-width:100%;
+			 width:auto;
+			 height:auto;
+			 margin: 0 auto;
+			 padding: 20px;
+		  }
+      .category div{
+      float:left;
+      clear:none;
+      width:18%;
+      }
+      .footer {
+   position: fixed;
+   left: 25px;
+   bottom: 0;
+   width: 100%;
+   background-color: #red;
+   color: #white;
+   text-align: left;
+ }
+    </style>
+
+  </head>
+  <body>
+    <h1>List of Items</h1>
+    <h2></h2>
+  <div class="container">
+
+    <div class="category">
+
+      <div class="category1">
+        <h3>Electronics</h3>
+        <form class="item" action="selected-item-page.html" method="GET">
+          <fieldset>
+            <legend>Electronics</legend>
+            <select class="category1" name="electronics" id="electronics" onchange= this.form.submit()>
+              <option value="">Electronics</option>
+			   <option value="el1">Jensen Music System</option>
+			    <option value="el2">Garmin GPS Navigator</option>
+				 <option value="el3">Dremel 3D Printer</option>
+				  <option value="el4">Optoma 3D Projector</option>
+				   <option value="el5">Samsung 43" LED UHD TV</option>
+
+
+            </select>
+          </fieldset>
+        </form>
+
+      </div>
+
+      <div class="category1">
+        <h3>Clothings</h3>
+        <form class="item" action="selected-item-page.html" method="GET">
+          <fieldset>
+            <legend>Clothings</legend>
+        <select class="category1" name="clothings" id="clothings"  onchange= this.form.submit()>
+          <option value="">Clothings</option>
+		  <option value="cl1">Ladies Jacket</option>
+          <option value="cl2">Ladies Sweater</option>
+          <option value="cl3">Ladies Beanie</option>
+          <option value="cl4">Mens Jeans</option>
+          <option value="cl5">Mens Socks</option>
+        </select>
+      </fieldset>
+    </form>
+      </div>
+
+      <div class="category1">
+        <h3>Home Appliances</h3>
+        <form class="item" action="selected-item-page.html" method="GET">
+          <fieldset>
+            <legend>Home Appliances</legend>
+        <select class="category1" name="homeappliances" id="homeappliances" onchange= this.form.submit()>
+          <option value="ha">Home Appliances</option>
+          <option value="ha1">Whirpool Refrigerator</option>
+          <option value="ha2">Samsung Gas Range</option>
+          <option value="ha3">Instant Pot</option>
+          <option value="ha4">LG Countertop Microwave</option>
+          <option value="ha5">Ninja Pro Kitchen System</option>
+        </select>
+      </fieldset>
+    </form>
+      </div>
+
+      <div class="category1">
+        <h3>Baby Gears</h3>
+        <form class="item" action="selected-item-page.html" method="GET">
+          <fieldset>
+            <legend>Baby Gears</legend>
+        <select class="category1" name="babygears" id="babygears" onchange= this.form.submit()>
+          <option value="">Baby Gears</option>
+		  <option value="bg1">Moto Bike</option>
+		  <option value="bg2">Car Seat</option>
+		  <option value="bg3">Toddler Bath Center</option>
+		  <option value="bg4">Graco Stroller</option>
+		  <option value="bg5">Graco High Chair</option>
+		  <option value="bg6">Disney Playard</option>
+
+        </select>
+      </fieldset>
+    </form>
+      </div>
+
+      <div class="category1">
+        <h3>Toys</h3>
+        <form class="item" action="selected-item-page.html" method="GET">
+          <fieldset>
+            <legend>Toys</legend>
+        <select class="category1" name="toys" id="toys" onchange= this.form.submit()>
+          <option value="">Toys</option>
+          <option value="ty1">Barbie Dreamhouse</option>
+          <option value="ty2">Fingerlings Hugs</option>
+          <option value="ty3">Lego Harry Potter</option>
+          <option value="ty4">Fisher Price Rocktopus</option>
+          <option value="ty5">Hot Wheels Track Set</option>
+        </select>
+      </fieldset>
+    </form>
+      </div>
+
+    </div
+  </div>
+  <div class="footer">
+    <a href="purchase.html">Continue Shopping Cart</a>
+  </div>
+
+  </body>
+</html>
